@@ -1,0 +1,34 @@
+IDA201 MOTORS & CONTROLS — CHAPTER 5 ESCAPE ROOM — TEACHER GUIDE
+
+WHAT YOU GET
+- 5 themed rooms
+- 25 total questions (5 per room)
+- Every question starts as short answer.
+- If the first response is incorrect, that same question automatically becomes multiple choice.
+- Each room includes a visual clue/background.
+- Final 5-digit escape code: 47295
+- First-try score and elapsed time are shown at the end.
+
+TOPICS
+Room 1 — Loads: loads, motors, solenoids, heaters, signal lights
+Room 2 — Relays & Contactors: contactors, relays, energized/de-energized, NO contacts, poles
+Room 3 — Switches: disconnects, push-buttons, poles, heating/cooling thermostats
+Room 4 — Safety & Control: fuses, thermal/magnetic overloads, magnetic starters, 24-V control circuits
+Room 5 — Wiring Diagrams: schematic, pictorial, factual, installation, L1/L2
+
+CLASSROOM USE
+Students can work individually, in pairs, or in teams. For a competition, rank students/teams by First-Try Keys and then fastest completion time.
+
+ANSWER KEY
+Room 1: Loads; Motor; Solenoid; Heater; Signal light
+Room 2: Contactor; Relay; De-energized; Close; One set of contacts
+Room 3: Disconnect switch; Push-button switch; One; Closes; Opens
+Room 4: Fuse; Heat; Magnetism; Overload protection; 24 volts
+Room 5: Schematic diagram; Pictorial diagram; Factual diagram; Installation diagram; L1 and L2
+
+STUDENT LINK
+After GitHub Pages is enabled from the main branch / root, the class link will be:
+https://skillstradeslab.github.io/ida201-chapter5-escape-room/
+
+NOTE
+This version is branded for IDA201 Motors & Controls and SkillsTradesLab and does not display the CEOurbanrootzsociety account name.
