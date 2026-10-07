@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IDA201 Motors & Controls — Chapter 5 Escape Room</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <div id="roomBg" class="room-bg"></div>
+  <div class="veil"></div>
+  <div class="scanlines"></div>
+
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand"><div class="brand-badge">⚡</div><span>IDA201 MOTORS & CONTROLS // CHAPTER 5</span></div>
+      <div class="hud">
+        <div class="chip">Room <strong id="hudRoom">—</strong></div>
+        <div class="chip">Question <strong id="hudQuestion">0/25</strong></div>
+        <div class="chip">First-Try Keys <strong id="hudScore">0</strong></div>
+        <div class="chip">Time <strong id="hudTime">00:00</strong></div>
+      </div>
+    </div>
+    <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+
+    <section id="startScreen" class="card hero">
+      <div>
+        <div class="kicker">Emergency Training Simulation</div>
+        <h1>The Building Is Locked Down.</h1>
+        <p>A control-system surge has sealed five HVAC rooms. Restore each system by solving its electrical clues. Every room hides one digit of the final escape code.</p>
+        <p><b>Your twist:</b> every question starts as a short-answer challenge. Miss it once, and the system converts that question into multiple choice so you can recover.</p>
+        <div class="setup">
+          <input id="studentName" class="name-input" maxlength="40" placeholder="Student or team name (optional)" />
+          <button id="startBtn" class="btn">Enter the Mechanical Room →</button>
+        </div>
+        <div class="rules">
+          <div class="rule"><b>25 locks</b>Five rooms, five questions each.</div>
+          <div class="rule"><b>Use the room</b>The background clue image can help.</div>
+          <div class="rule"><b>Earn keys</b>First-try correct answers add to your Key Score.</div>
+        </div>
+      </div>
+      <div class="hero-graphic" aria-label="Stylized HVAC escape room control panel">
+        <svg viewBox="0 0 520 420" role="img">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1"><stop stop-color="#54d5ff"/><stop offset="1" stop-color="#ffd166"/></linearGradient>
+          </defs>
+          <rect x="25" y="25" width="470" height="370" rx="28" fill="#071a27" stroke="#ffffff33" stroke-width="3"/>
+          <circle cx="260" cy="145" r="82" fill="none" stroke="url(#g1)" stroke-width="8"/>
+          <circle cx="260" cy="145" r="34" fill="#ffffff10" stroke="#54d5ff" stroke-width="5"/>
+          <path d="M260 65v34M260 191v34M180 145h34M306 145h34M204 89l24 24M292 177l24 24M316 89l-24 24M228 177l-24 24" stroke="#b9ccda" stroke-width="8" stroke-linecap="round"/>
+          <rect x="75" y="265" width="370" height="78" rx="16" fill="#ffffff0a" stroke="#ffffff22"/>
+          <path d="M100 305h42l14-20 24 40 24-40 24 40 24-40 24 40 24-40 24 20h90" fill="none" stroke="#ffd166" stroke-width="6"/>
+          <circle cx="118" cy="362" r="11" fill="#65e59a"/><circle cx="152" cy="362" r="11" fill="#ff7373"/><circle cx="186" cy="362" r="11" fill="#54d5ff"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="card room-card hidden">
+      <aside class="room-aside">
+        <div class="kicker" id="roomKicker">Room 1</div>
+        <h2 id="roomTitle">Load Bay</h2>
+        <p id="roomStory"></p>
+        <div class="clue-title">Background clue panel</div>
+        <div id="clueBoard" class="clue-board"></div>
+        <div class="clue-title" style="margin-top:18px">Recovered escape code</div>
+        <div id="codeSlots" class="code-slots"></div>
+      </aside>
+      <main class="room-main">
+        <div class="room-meta">
+          <div>
+            <div class="room-num" id="roomNum">ROOM 1 / 5</div>
+            <div class="question-count" id="questionCount">Lock 1 of 5</div>
+          </div>
+          <button id="resetBtn" class="btn secondary" title="Start over">↻ Reset</button>
+        </div>
+        <div id="question" class="question"></div>
+        <div id="shortAnswerArea">
+          <div class="answer-row">
+            <input id="answerInput" autocomplete="off" placeholder="Type your answer…" />
+            <button id="submitAnswer" class="btn">Test Answer</button>
+          </div>
+        </div>
+        <div id="mcqArea" class="mcq hidden"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+      </main>
+    </section>
+
+    <section id="roomCompleteScreen" class="card room-complete hidden">
+      <div class="kicker">System Restored</div>
+      <h2 id="completeTitle">Room Cleared</h2>
+      <p>You recovered this digit of the master escape code:</p>
+      <div id="bigCode" class="big-code">0</div>
+      <p id="completeText"></p>
+      <button id="nextRoomBtn" class="btn">Open the Next Door →</button>
+    </section>
+
+    <section id="finalScreen" class="card final hidden">
+      <div class="kicker">Final Door</div>
+      <h2>Enter the 5-Digit Master Code</h2>
+      <p>The five room digits unlock the exit. Enter them in room order.</p>
+      <div id="finalCodeEntry" class="final-code-entry"></div>
+      <button id="escapeBtn" class="btn">UNLOCK EXIT</button>
+      <div id="finalFeedback" class="feedback"></div>
+    </section>
+
+    <section id="escapedScreen" class="card final hidden">
+      <div class="kicker">Lockdown Ended</div>
+      <div class="escape-banner">YOU ESCAPED! ⚡</div>
+      <p id="escapeMessage"></p>
+      <div class="stats">
+        <div class="stat"><b id="statKeys">0/25</b>First-Try Keys</div>
+        <div class="stat"><b id="statTime">00:00</b>Escape Time</div>
+        <div class="stat"><b>5/5</b>Rooms Restored</div>
+      </div>
+      <p>You proved you can read the room <i>and</i> the circuit.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" onclick="window.print()">Print / Save Certificate</button>
+        <button id="playAgainBtn" class="btn secondary">Play Again</button>
+      </div>
+    </section>
+
+    <div class="footer">IDA201 Motors & Controls • Chapter 5 classroom review • Runs offline</div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
